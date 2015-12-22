@@ -1,0 +1,26 @@
+.b-car { width: 54px; height: 54px; margin-left:-27px; margin-top:-27px; }
+.b-car.b-car_blue { background: url(firefox.png) no-repeat 0 0;
+                    background-size: 54px 54px;}
+.b-car.b-car-direction-e {transform: rotate(270deg)}
+.b-car.b-car-direction-ne {transform: rotate(225deg)}
+.b-car.b-car-direction-n {transform: rotate(180deg)}
+.b-car.b-car-direction-nw {transform: rotate(135deg)}
+.b-car.b-car-direction-w {transform: rotate(90deg)}
+.b-car.b-car-direction-sw {transform: rotate(45deg)}
+.b-car.b-car-direction-s {transform: rotate(0deg)}
+.b-car.b-car-direction-se {transform: rotate(315deg)}
+.b-info { 
+    width: 54px; 
+    margin-left:-27px; 
+    margin-top:5px; 
+    background-color: #ffffff; 
+    text-align: center; 
+    font-weight: bold;
+    border-radius: 10px; 
+    opacity: .7;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #ff6633;
+/*    -webkit-text-fill-color: transparent; /* переопределяет цвет текста с белого на прозрачный в браузерах на webkit */
+/*    -webkit-background-clip: text; */
+}
