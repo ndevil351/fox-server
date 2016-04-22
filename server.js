@@ -235,7 +235,7 @@ io.on('connection', function(socket) {
 
       socket.last_data = data;
 
-      chekFoxTimeouts(socket);
+      checkFoxTimeouts(socket);
 
       data = socket.last_data; //данные могли измениться после проверки на таймауты лисы
 
@@ -349,7 +349,7 @@ function moveFox() {
     //messages.push(data);
 
     sockets.forEach(function(socket_e) {
-      chekFoxTimeouts(socket_e);
+      checkFoxTimeouts(socket_e);
     });
 
   }, function() {
@@ -363,7 +363,7 @@ function moveFox() {
   });
 }
 
-function chekFoxTimeouts(socket_e) {
+function checkFoxTimeouts(socket_e) {
   data = socket_e.last_data;
   if (data) {
     name = data.name;
@@ -435,6 +435,7 @@ router.get('/vars', function(req, res) {
     'foxWaypoints.length        : '+foxWaypoints.length+'<br>\n'+
     'foxWaypoints_next.length   : '+foxWaypoints_next.length+'<br>\n'+
     'routeReqTimer                  : ' + routeReqTimer + '<br>\n' +
+    'routeReqTimer                  : ' + (new Date(routeReqTimer)) + '<br>\n' +
     'foxTimers                  : ' + JSON.stringify(foxTimers) + '<br>\n' +
     'foxTimerLimit              : ' + JSON.stringify(foxTimerLimit) + '<br>\n' +
     //'sockets                    : '+JSON.stringify(sockets)+'<br>\n'+
