@@ -432,8 +432,8 @@ router.get('/vars', function(req, res) {
     'distance_treshold          : ' + distance_treshold + '<br>\n' +
     'nextPointsOnMove           : ' + nextPointsOnMove + '<br>\n' +
     'nextPointsOnMove_interval  : ' + nextPointsOnMove_interval + '<br>\n' +
-    //'foxWaypoints               : '+JSON.stringify(foxWaypoints)+'<br>\n'+
-    //'foxWaypoints_next          : '+JSON.stringify(foxWaypoints_next)+'<br>\n'+
+    'foxWaypoints.length        : '+foxWaypoints.length+'<br>\n'+
+    'foxWaypoints_next.length   : '+foxWaypoints_next.length+'<br>\n'+
     'routeReqTimer                  : ' + routeReqTimer + '<br>\n' +
     'foxTimers                  : ' + JSON.stringify(foxTimers) + '<br>\n' +
     'foxTimerLimit              : ' + JSON.stringify(foxTimerLimit) + '<br>\n' +
