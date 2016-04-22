@@ -256,6 +256,8 @@ io.on('connection', function(socket) {
     if (foxWaypoints.length == 0) {
       foxWaypoints = [].concat(JSON.parse(msg));
       console.log('foxWaypoints.length = ' + foxWaypoints.length);
+      foxWaypoints_next = [].concat(JSON.parse(msg));
+      console.log('foxWaypoints_next.length = ' + foxWaypoints_next.length);
 
       route_calc_request();
     }
