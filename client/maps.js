@@ -1,4 +1,4 @@
-var myMap, car, car_nextMove, myGeoObjects, update_time, update_time_display, socket, cashedReqRoute;
+var myMap, car, car_nextMove, myGeoObjects, update_time, update_time_display, socket, cashedReqRoute, name, name_id, player_name, client_names;
 
 var distance_treshold = 20;
 
