@@ -1,4 +1,4 @@
-var myMap, car, car_nextMove, myGeoObjects, update_time, update_time_display, socket, cashedReqRoute, name, name_id, player_name, client_names;
+var myMap, car, car_nextMove, myGeoObjects, update_time, update_time_display, socket, cashedReqRoute, name, name_id, player_name, client_names, send_coords_btn;
 
 var distance_treshold = 20;
 
@@ -36,8 +36,10 @@ function displayPosition(position) {
 	arr = [
 		[position.coords.latitude, position.coords.longitude], coordsText, position.isFox, [], socket.socket.sessionid, position.coords.speed * 3.6, player_name
 	];
-	socket.emit('coords', JSON.stringify(arr));
-	console.log('Sent coords:', JSON.stringify(arr));
+	if (send_coords_btn && send_coords_btn.state.get('selected')) {
+		socket.emit('coords', JSON.stringify(arr));
+		console.log('Sent coords:', JSON.stringify(arr));
+	}
 
 	myMap.setBounds(
 		myGeoObjects.getBounds(), {
@@ -69,10 +71,32 @@ function init() {
 		// При инициализации карты обязательно нужно указать
 		// её центр и коэффициент масштабирования.
 		center: [59.997954, 30.233932], // Спб
-		zoom: 15
+		zoom: 15,
+		controls: ['zoomControl', 'typeSelector', 'trafficControl', 'fullscreenControl']
 	}, {
 		autoFitToViewport: 'always'
 			//searchControlProvider: 'yandex#search'
+	});
+
+	send_coords_btn = new ymaps.control.Button({
+		data: {
+			image: 'https://' + socket.socket.options.host + '/car/gps-01-16.png',
+		},
+		options: {
+			selectOnClick: true,
+			maxWidth: 30,
+			position: {
+				top: 60,
+				left: 10
+			}
+		},
+		state: {
+			selected: false
+		}
+	});
+
+	myMap.controls.add(hold_center_btn, {
+		float: 'left'
 	});
 
 	if (cashedReqRoute) { //выполним запрос на маршрут, если он все еще висит в кэше
@@ -357,7 +381,7 @@ function addFoxRoute() {
 	n = 0;
 
 	//++ машинка: https://github.com/zxqfox/ymaps
-	$.getScript('https://fox-server.azurewebsites.net/car/car.js', function() {
+	$.getScript('https://' + socket.socket.options.host + '/car/car.js', function() {
 		car = new Car({
 			// iconLayout: ymaps.templateLayoutFactory.createClass(
 			// 	'<div id="fox-icon" class="b-car b-car_blue b-car-direction-$[properties.direction]">$[properties.textFoxIcon]</div>'

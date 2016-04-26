@@ -460,7 +460,7 @@ router.get('/vars', function(req, res) {
       if (d_.last_data) {
         d_coords = JSON.stringify(JSON.parse(d_.last_data.text)[0]);
       }
-      r__.push([d_.store.data.name, d_.id, d_.isFoxCatched, d_coords]);
+      r__.push([d_.store.data.name, d_.id, d_.isFoxCatched, d_coords, d_.player_name]);
     });
     return JSON.stringify(r__);
   }
