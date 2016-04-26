@@ -353,7 +353,7 @@ function addFoxRoute() {
 	n = 0;
 
 	//++ машинка: https://github.com/zxqfox/ymaps
-	$.getScript('/car/car.js', function() {
+	$.getScript('https://fox-server.azurewebsites.net/car/car.js', function() {
 		car = new Car({
 			// iconLayout: ymaps.templateLayoutFactory.createClass(
 			// 	'<div id="fox-icon" class="b-car b-car_blue b-car-direction-$[properties.direction]">$[properties.textFoxIcon]</div>'
