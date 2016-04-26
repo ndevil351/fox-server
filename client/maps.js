@@ -87,7 +87,7 @@ function init() {
 			maxWidth: 30,
 			position: {
 			 	top: 10,
-			// 	left: 10
+			 	left: 10
 			}
 		},
 		state: {
