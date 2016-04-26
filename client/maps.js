@@ -118,7 +118,8 @@ function updatePlacemark(a, b, c, d) {
 		updated = false;
 		for (i = 0; i < myMap.geoObjects.getLength(); i++) {
 			m = myMap.geoObjects.get(i);
-			if (m.properties.get('playerID') == a + '-' + JSON.parse(b)[4]) {
+			if (b &&
+				m.properties.get('playerID') == a + '-' + JSON.parse(b)[4]) {
 				m.geometry.setCoordinates(JSON.parse(b)[0]);
 				m.properties.set('iconContent', a + ((JSON.parse(b).player_name) ? ' (' + JSON.parse(b).player_name + ') ' : ' ') + ': ' + Math.round(JSON.parse(b)[5]) + 'км/ч');
 				m.properties.set('balloonContentHeader', a);
@@ -140,7 +141,8 @@ function updatePlacemark(a, b, c, d) {
 		if (!updated) {
 			for (i = 0; i < myGeoObjects.getLength(); i++) {
 				m = myGeoObjects.get(i);
-				if (m.properties.get('playerID') == a + '-' + JSON.parse(b)[4]) {
+				if (b &&
+					m.properties.get('playerID') == a + '-' + JSON.parse(b)[4]) {
 					m.geometry.setCoordinates(JSON.parse(b)[0]);
 					m.properties.set('iconContent', a + ((JSON.parse(b).player_name) ? ' (' + JSON.parse(b).player_name + ') ' : ' ') + ': ' + Math.round(JSON.parse(b)[5]) + 'км/ч');
 					m.properties.set('balloonContentHeader', a);
@@ -162,7 +164,7 @@ function updatePlacemark(a, b, c, d) {
 			};
 		};
 
-		if (!updated) {
+		if (!updated && b) {
 			player = new ymaps.Placemark(JSON.parse(b)[0], {
 				iconContent: a + ((JSON.parse(b).player_name) ? ' (' + JSON.parse(b).player_name + ') ' : ' ') + ': ' + Math.round(JSON.parse(b)[5]) + 'км/ч',
 				balloonContentHeader: a,
