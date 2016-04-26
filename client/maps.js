@@ -99,7 +99,7 @@ function init() {
 		float: 'left'
 	});
 
-	send_coords_btn.events.add('optionschange', function() {
+	send_coords_btn.events.add('select', function() {
 		socket.emit('send_coords', send_coords_btn.state.get('selected'));
 	});
 
