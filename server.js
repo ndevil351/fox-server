@@ -56,6 +56,16 @@ var refPoints = [
   [60.000937, 30.234605], //планерная
   [59.996899, 30.220310], //яхтенная
   [59.997978, 30.201435], //лыжный пер
+  [60.0082548, 30.2299333], //камышовая2
+  [60.0067612, 30.2413863], //камышовая3
+  [60.0052219, 30.2533007], //камышовая4
+  [60.0018721, 30.2507472], //богатырский2
+  [59.9960945, 30.2493310], //оптиков
+  [59.9989110, 30.2550173], //торфяная
+  [59.9935031, 30.2533382], //гаккелевская
+  [59.9907290, 30.2473730], //мебельная
+  [59.9941490, 30.2439129], //стародеревенская
+  [59.9929558, 30.2271652], //мебельная2
 ];
 
 var routeStart = [
@@ -273,11 +283,13 @@ function updateRoster() {
     sockets,
     function(socket, callback) {
       //socket.get('name', callback);
-      socket.get('name', function(err,name){
+      socket.get('name', function(err, name) {
         result = {};
         result.id = socket.id;
-        if (!err){result.name = name};
-        callback(err,result);
+        if (!err) {
+          result.name = name
+        };
+        callback(err, result);
       });
     },
     function(err, names) {
@@ -307,7 +319,7 @@ function route_calc_request() {
 
     broadcast('route_calc_request', data);
 
-  } 
+  }
 }
 
 server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function() {
@@ -434,8 +446,8 @@ router.get('/vars', function(req, res) {
     'distance_treshold          : ' + distance_treshold + '<br>\n' +
     'nextPointsOnMove           : ' + nextPointsOnMove + '<br>\n' +
     'nextPointsOnMove_interval  : ' + nextPointsOnMove_interval + '<br>\n' +
-    'foxWaypoints.length        : '+foxWaypoints.length+'<br>\n'+
-    'foxWaypoints_next.length   : '+foxWaypoints_next.length+'<br>\n'+
+    'foxWaypoints.length        : ' + foxWaypoints.length + '<br>\n' +
+    'foxWaypoints_next.length   : ' + foxWaypoints_next.length + '<br>\n' +
     'routeReqTimer                  : ' + routeReqTimer + '<br>\n' +
     'routeReqTimer                  : ' + (new Date(routeReqTimer)) + '<br>\n' +
     'foxTimers                  : ' + JSON.stringify(foxTimers) + '<br>\n' +
