@@ -283,7 +283,7 @@ io.on('connection', function(socket) {
   socket.on('send_coords', function(state) {
     if (state) {
       sockets.forEach(function(socket_e) {
-        if (socket.name == socket_e.name && socket.player_name !== socket_e.player_name) {
+        if (socket.name == socket_e.name && socket.id !== socket_e.id) {
           socket_e.send_coords = false;
           socket_e.emit('set_send_coords', socket_e.send_coords);
         }
