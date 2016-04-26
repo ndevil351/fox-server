@@ -281,22 +281,44 @@ io.on('connection', function(socket) {
   });
 });
 
+// function updateRoster() {
+//   async.map(
+//     sockets,
+//     function(socket, callback) {
+//       //socket.get('name', callback);
+//       socket.get('name', function(err, name) {
+//         result = {};
+//         result.id = socket.id;
+//         if (!err) {
+//           result.name = name
+//         };
+//         callback(err, result);
+//       });
+//     },
+//     function(err, names) {
+//       broadcast('roster', names);
+//     }
+//   );
+// }
 function updateRoster() {
   async.map(
     sockets,
     function(socket, callback) {
-      //socket.get('name', callback);
       socket.get('name', function(err, name) {
         result = {};
         result.id = socket.id;
+        if (socket.last_data) {
+          result.last_data = socket.last_data.text;
+        }
         if (!err) {
-          result.name = name
-        };
+          result.name = name;
+        }
         callback(err, result);
       });
     },
     function(err, names) {
       broadcast('roster', names);
+      broadcast_adm('adm_sockets', sock_to_txt(sockets));
     }
   );
 }
