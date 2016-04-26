@@ -86,8 +86,8 @@ function init() {
 			selectOnClick: true,
 			maxWidth: 30,
 			position: {
-				top: 60,
-				left: 10
+			 	top: 10,
+			// 	left: 10
 			}
 		},
 		state: {
