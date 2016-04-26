@@ -318,7 +318,7 @@ function updateRoster() {
     },
     function(err, names) {
       broadcast('roster', names);
-      broadcast_adm('adm_sockets', sock_to_txt(sockets));
+      //broadcast_adm('adm_sockets', sock_to_txt(sockets));
     }
   );
 }
