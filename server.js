@@ -255,7 +255,10 @@ io.on('connection', function(socket) {
   });
 
   socket.on('identify', function(name) {
-    socket.set('name', String(name || 'Anonymous'), function(err) {
+    socket.set('name', String(name.name || 'Anonymous'), function(err) {
+      socket.name = name.name;
+      socket.name_id = name.name_id;
+      socket.player_name = name.player_name;
       updateRoster();
     });
   });

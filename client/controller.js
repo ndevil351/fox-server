@@ -65,8 +65,19 @@ function ChatController($scope) {
   };
 
   $scope.setName = function setName() {
-    console.log('Sending name:', $scope.name);
-    socket.emit('identify', $scope.name);
+    // console.log('Sending name:', $scope.name);
+    // socket.emit('identify', $scope.name);
+    console.log('Sending name:', {
+      name: $scope.name,
+      name_id: '',
+      player_name: ''
+    });
+    socket.emit('identify', {
+      name: $scope.name,
+      name_id: '',
+      player_name: ''
+    });
+
   };
 
   if (navigator.geolocation) {
