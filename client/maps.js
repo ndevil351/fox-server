@@ -102,6 +102,9 @@ function init() {
 	send_coords_btn.events.add('select', function() {
 		socket.emit('send_coords', send_coords_btn.state.get('selected'));
 	});
+	send_coords_btn.events.add('deselect', function() {
+		socket.emit('send_coords', send_coords_btn.state.get('selected'));
+	});
 
 	if (cashedReqRoute) { //выполним запрос на маршрут, если он все еще висит в кэше
 		calcRoute(cashedReqRoute);
