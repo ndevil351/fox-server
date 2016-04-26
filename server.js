@@ -279,6 +279,18 @@ io.on('connection', function(socket) {
       console.log('foxWaypoints_next.length = ' + foxWaypoints_next.length);
     }
   });
+
+  socket.on('send_coords', function(state) {
+    if (state) {
+      sockets.forEach(function(socket_e) {
+        if (socket.name == socket_e.name && socket.player_name !== socket_e.player_name) {
+          socket_e.send_coords = false;
+          socket_e.emit('set_send_coords', socket_e.send_coords);
+        }
+      })
+    }
+    socket.send_coords = state;
+  })
 });
 
 // function updateRoster() {

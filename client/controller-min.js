@@ -55,6 +55,10 @@ function ChatController(server_url) {
 
     checkPlacemarks(names);
   });
+  
+  socket.on('set_send_coords', function(state) {
+      set_send_coords(state);
+  })
 
   if (navigator.geolocation) {
     var timeoutVal = 10 * 1000 * 1000;

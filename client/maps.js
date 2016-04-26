@@ -99,6 +99,10 @@ function init() {
 		float: 'left'
 	});
 
+	send_coords_btn.events.add('click', function() {
+		socket.emit('send_coords', send_coords_btn.state.get('selected'));
+	});
+
 	if (cashedReqRoute) { //выполним запрос на маршрут, если он все еще висит в кэше
 		calcRoute(cashedReqRoute);
 	};
@@ -556,7 +560,7 @@ function calcRoute(requestedRoute) {
 	else {
 		cashedReqRoute = requestedRoute;
 	};
-};
+}
 
 function updateFox(msg) {
 	car.properties.set('balloonContent', msg.replace('\n\r', '<br>'));
@@ -571,4 +575,8 @@ function foxIsCatched() {
 		car.balloon.open();
 		car.events.add('balloonclose', foxIsCatched(), this);
 	}, 10000);
-};
+}
+
+function set_send_coords(state) {
+	send_coords_btn.state.set('selected', state);
+}
