@@ -95,7 +95,7 @@ function init() {
 		}
 	});
 
-	myMap.controls.add(hold_center_btn, {
+	myMap.controls.add(send_coords_btn, {
 		float: 'left'
 	});
 
