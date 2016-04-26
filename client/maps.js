@@ -86,8 +86,8 @@ function init() {
 			selectOnClick: true,
 			maxWidth: 30,
 			position: {
-			 	top: 10,
-			 	left: 10
+				top: 10,
+				left: 10
 			}
 		},
 		state: {
@@ -213,6 +213,16 @@ function updatePlacemark(a, b, c, d) {
 
 			};
 		}
+	}
+
+	if (a == name) {
+		myMap.setBounds(
+			myGeoObjects.getBounds(), {
+				checkZoomRange: true,
+				duration: 1500,
+				preciseZoom: true,
+				zoomMargin: 100
+			});
 	}
 
 	if (document.getElementById('debug-text')) {
