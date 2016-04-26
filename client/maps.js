@@ -188,7 +188,9 @@ function updatePlacemark(a, b, c, d) {
 		}
 	}
 
-	document.getElementById('debug-text').innerHTML = 'GeoObj: ' + myMap.geoObjects.getLength() + ' MyObj: ' + myGeoObjects.getLength();
+	if (document.getElementById('debug-text')) {
+		document.getElementById('debug-text').innerHTML = 'GeoObj: ' + myMap.geoObjects.getLength() + ' MyObj: ' + myGeoObjects.getLength();
+	}
 }
 
 function lookAtFox(playerMark) {
