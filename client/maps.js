@@ -34,7 +34,7 @@ function displayPosition(position) {
 	};
 
 	arr = [
-		[position.coords.latitude, position.coords.longitude], coordsText, position.isFox, [], socket.socket.sessionid, position.coords.speed * 3.6
+		[position.coords.latitude, position.coords.longitude], coordsText, position.isFox, [], socket.socket.sessionid, position.coords.speed * 3.6, player_name
 	];
 	socket.emit('coords', JSON.stringify(arr));
 	console.log('Sent coords:', JSON.stringify(arr));
@@ -121,7 +121,7 @@ function updatePlacemark(a, b, c, d) {
 			if (b &&
 				m.properties.get('playerID') == a + '-' + JSON.parse(b)[4]) {
 				m.geometry.setCoordinates(JSON.parse(b)[0]);
-				m.properties.set('iconContent', a + ((JSON.parse(b).player_name) ? ' (' + JSON.parse(b).player_name + ') ' : ' ') + ': ' + Math.round(JSON.parse(b)[5]) + 'км/ч');
+				m.properties.set('iconContent', a + ((JSON.parse(b)[6]) ? ' (' + JSON.parse(b)[6] + ') ' : ' ') + ': ' + Math.round(JSON.parse(b)[5]) + 'км/ч');
 				m.properties.set('balloonContentHeader', a);
 				m.properties.set('balloonContent', JSON.parse(b)[1] + '<br>Is on fox tail: ' + d + 'ms');
 				if (m.geometry.getType() == 'Circle') {
@@ -144,7 +144,7 @@ function updatePlacemark(a, b, c, d) {
 				if (b &&
 					m.properties.get('playerID') == a + '-' + JSON.parse(b)[4]) {
 					m.geometry.setCoordinates(JSON.parse(b)[0]);
-					m.properties.set('iconContent', a + ((JSON.parse(b).player_name) ? ' (' + JSON.parse(b).player_name + ') ' : ' ') + ': ' + Math.round(JSON.parse(b)[5]) + 'км/ч');
+					m.properties.set('iconContent', a + ((JSON.parse(b)[6]) ? ' (' + JSON.parse(b)[6] + ') ' : ' ') + ': ' + Math.round(JSON.parse(b)[5]) + 'км/ч');
 					m.properties.set('balloonContentHeader', a);
 					m.properties.set('balloonContent', JSON.parse(b)[1] + '<br>Is on fox tail: ' + d + 'ms');
 					if (m.geometry.getType() == 'Circle') {
@@ -166,7 +166,7 @@ function updatePlacemark(a, b, c, d) {
 
 		if (!updated && b) {
 			player = new ymaps.Placemark(JSON.parse(b)[0], {
-				iconContent: a + ((JSON.parse(b).player_name) ? ' (' + JSON.parse(b).player_name + ') ' : ' ') + ': ' + Math.round(JSON.parse(b)[5]) + 'км/ч',
+				iconContent: a + ((JSON.parse(b)[6]) ? ' (' + JSON.parse(b)[6] + ') ' : ' ') + ': ' + Math.round(JSON.parse(b)[5]) + 'км/ч',
 				balloonContentHeader: a,
 				balloonContent: JSON.parse(b)[1] + '<br>Is on fox tail: ' + d + 'ms',
 				isPlayer: true,
