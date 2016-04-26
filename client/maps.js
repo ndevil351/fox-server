@@ -204,7 +204,8 @@ function updatePlacemark(a, b, c, d) {
 			});
 			player.events.add('change', lookAtFox(player), this);
 
-			if (JSON.parse(b)[4] == socket.socket.sessionid) {
+			// if (JSON.parse(b)[4] == socket.socket.sessionid) {
+			if (a == name) {
 				myGeoObjects.add(player);
 			}
 			else {
