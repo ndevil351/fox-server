@@ -120,7 +120,7 @@ function updatePlacemark(a, b, c, d) {
 			m = myMap.geoObjects.get(i);
 			if (m.properties.get('playerID') == a + '-' + JSON.parse(b)[4]) {
 				m.geometry.setCoordinates(JSON.parse(b)[0]);
-				m.properties.set('iconContent', a + ': ' + Math.round(JSON.parse(b)[5]) + 'км/ч');
+				m.properties.set('iconContent', a + ((JSON.parse(b).player_name) ? ' (' + JSON.parse(b).player_name + ') ' : ' ') + ': ' + Math.round(JSON.parse(b)[5]) + 'км/ч');
 				m.properties.set('balloonContentHeader', a);
 				m.properties.set('balloonContent', JSON.parse(b)[1] + '<br>Is on fox tail: ' + d + 'ms');
 				if (m.geometry.getType() == 'Circle') {
@@ -142,7 +142,7 @@ function updatePlacemark(a, b, c, d) {
 				m = myGeoObjects.get(i);
 				if (m.properties.get('playerID') == a + '-' + JSON.parse(b)[4]) {
 					m.geometry.setCoordinates(JSON.parse(b)[0]);
-					m.properties.set('iconContent', a + ': ' + Math.round(JSON.parse(b)[5]) + 'км/ч');
+					m.properties.set('iconContent', a + ((JSON.parse(b).player_name) ? ' (' + JSON.parse(b).player_name + ') ' : ' ') + ': ' + Math.round(JSON.parse(b)[5]) + 'км/ч');
 					m.properties.set('balloonContentHeader', a);
 					m.properties.set('balloonContent', JSON.parse(b)[1] + '<br>Is on fox tail: ' + d + 'ms');
 					if (m.geometry.getType() == 'Circle') {
@@ -164,7 +164,7 @@ function updatePlacemark(a, b, c, d) {
 
 		if (!updated) {
 			player = new ymaps.Placemark(JSON.parse(b)[0], {
-				iconContent: a + ': ' + Math.round(JSON.parse(b)[5]) + 'км/ч',
+				iconContent: a + ((JSON.parse(b).player_name) ? ' (' + JSON.parse(b).player_name + ') ' : ' ') + ': ' + Math.round(JSON.parse(b)[5]) + 'км/ч',
 				balloonContentHeader: a,
 				balloonContent: JSON.parse(b)[1] + '<br>Is on fox tail: ' + d + 'ms',
 				isPlayer: true,
