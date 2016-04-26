@@ -286,6 +286,7 @@ io.on('connection', function(socket) {
         if (socket.name == socket_e.name && socket.id !== socket_e.id) {
           socket_e.send_coords = false;
           socket_e.emit('set_send_coords', socket_e.send_coords);
+          broadcast('removed', socket_e.name + '-' + socket_e.id);
         }
       })
     }
