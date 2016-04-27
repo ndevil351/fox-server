@@ -225,8 +225,8 @@ function updatePlacemark(a, b, c, d) {
 				balloonPanelMaxMapArea: 0,
 				draggable: false,
 				preset: "islands#blueStretchyIcon",
-				//draggable: false,
-				draggable: (JSON.parse(b)[4] == socket.socket.sessionid), //заглушка для теста, потом убрать, иначе все пользователи смогут таскать свои меркеры
+				draggable: false,
+				//draggable: (JSON.parse(b)[4] == socket.socket.sessionid), //заглушка для теста, потом убрать, иначе все пользователи смогут таскать свои меркеры
 				//draggable: (JSON.parse(msg_text).session == socket.socket.sessionid), //заглушка для теста, потом убрать, иначе все пользователи смогут таскать свои меркеры
 				//draggable: (!JSON.parse(msg_text).player_name && JSON.parse(msg_text).session == socket.socket.sessionid), //только если юзер не определен и только свою сессию
 				openEmptyBalloon: true
