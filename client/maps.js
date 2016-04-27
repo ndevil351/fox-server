@@ -293,7 +293,8 @@ function lookAtFox(playerMark) {
 					strokeWidth: 5 // Ширина обводки в пикселях.
 				});
 
-			if (circleMark.properties.get('playerID').search(socket.socket.sessionid) >= 0) {
+			//if (circleMark.properties.get('playerID').search(socket.socket.sessionid) >= 0) {
+			if (circleMark.properties.get('playerID').search(name) >= 0) {
 				myGeoObjects.add(circleMark);
 			}
 			else {
