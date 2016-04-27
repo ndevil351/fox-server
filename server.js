@@ -444,7 +444,7 @@ function checkFoxTimeouts(socket_e) {
                 socket_c.emit('level_up', level_up_code);
                 socket_c.isFoxCatched = true;
               }
-            })
+            });
           }
 
           broadcast('coords', data);
