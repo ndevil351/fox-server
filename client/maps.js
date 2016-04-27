@@ -265,7 +265,7 @@ function lookAtFox(playerMark) {
 		if (!updated) {
 			circleMark = new ymaps.Circle(
 				[playerMark.geometry.getCoordinates(),
-					distance_treshold
+					distance_treshold*3
 				], {
 					isPlayer: true,
 					isFox: false,
