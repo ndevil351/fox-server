@@ -73,19 +73,35 @@ function ChatController(server_url) {
     set_send_coords(state);
   })
 
-  if (navigator.geolocation) {
-    var timeoutVal = 10 * 1000 * 1000;
-    navigator.geolocation.watchPosition(
-      displayPosition,
-      displayError, {
-        enableHighAccuracy: true,
-        timeout: timeoutVal,
-        maximumAge: 0
-      });
+  //теперь это deprecated с небезопасных источников в хроме =((((((
+  // if (navigator.geolocation) {
+  //   var timeoutVal = 10 * 1000 * 1000;
+  //   navigator.geolocation.watchPosition(
+  //     displayPosition,
+  //     displayError, {
+  //       enableHighAccuracy: true,
+  //       timeout: timeoutVal,
+  //       maximumAge: 0
+  //     });
+  // }
+  // else {
+  //   alert("Geolocation не поддерживается данным браузером");
+  // };
+  //вместо этого форвард из фрейма, который открыт по https
+  function secure_coords_listener(event) {
+    if (event.origin !== 'https://' + socket.socket.options.host)
+      return;
+
+    displayPosition(event.data);
+  }
+
+  if (window.addEventListener) {
+    window.addEventListener("message", secure_coords_listener, false);
   }
   else {
-    alert("Geolocation не поддерживается данным браузером");
-  };
+    window.attachEvent("onmessage", secure_coords_listener);
+  }
+
 
   // function displayPosition(position) {
   //   coordsText = "Широта: " + position.coords.latitude + "<br> Долгота: " + position.coords.longitude + "<br> Точность: " + position.coords.accuracy + "м<br> Скорость: " + position.coords.speed * 3.6 + " км/ч" + "<br> Обновлено: " + (new Date(position.timestamp)).toLocaleString() + "." + (new Date(position.timestamp)).getMilliseconds();
