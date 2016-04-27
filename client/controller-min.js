@@ -41,6 +41,11 @@ function ChatController(server_url) {
     }
   });
 
+  socket.on('distance_treshold', function(settings) {
+    console.log('Reacived distance_treshold:', settings);
+    distance_treshold = settings;
+  });
+
   socket.on('route_calc_request', function(msg) {
     console.log('Route calc request reacived:', msg);
     calcRoute(JSON.parse(msg));

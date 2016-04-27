@@ -36,7 +36,7 @@ var speed1 = 30; //минимальная скорость км/ч
 var speed2 = 20; //+дельта к скорости (мин + (от 0 до дельта)) км/ч
 
 //радиус определения лисы (м)
-var distance_treshold = 20;
+var distance_treshold = 50;
 //сколько тикает таймер лисы (мс)
 var foxTimerLimit = 10000;
 //собственно кодик лисы =))
@@ -176,6 +176,7 @@ io.on('connection', function(socket) {
   messages.forEach(function(data) {
     socket.emit('message', data);
   });
+  socket.emit('distance_treshold', distance_treshold);
 
   sockets.push(socket);
 
