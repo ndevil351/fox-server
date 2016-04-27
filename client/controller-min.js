@@ -74,33 +74,39 @@ function ChatController(server_url) {
   })
 
   //теперь это deprecated с небезопасных источников в хроме =((((((
-  // if (navigator.geolocation) {
-  //   var timeoutVal = 10 * 1000 * 1000;
-  //   navigator.geolocation.watchPosition(
-  //     displayPosition,
-  //     displayError, {
-  //       enableHighAccuracy: true,
-  //       timeout: timeoutVal,
-  //       maximumAge: 0
-  //     });
-  // }
-  // else {
-  //   alert("Geolocation не поддерживается данным браузером");
-  // };
-  //вместо этого форвард из фрейма, который открыт по https
-  function secure_coords_listener(event) {
-    if (event.origin !== 'https://' + socket.socket.options.host)
-      return;
-
-    displayPosition(event.data);
-  }
-
-  if (window.addEventListener) {
-    window.addEventListener("message", secure_coords_listener, false);
+  if (navigator.appVersion.search('Chrome/50') >= 0) {
+    alert("У вас Хром последних версий, c ним ничего не получится =(((. Используйте FireFox, например.");
   }
   else {
-    window.attachEvent("onmessage", secure_coords_listener);
+    if (navigator.geolocation) {
+      var timeoutVal = 10 * 1000 * 1000;
+      navigator.geolocation.watchPosition(
+        displayPosition,
+        displayError, {
+          enableHighAccuracy: true,
+          timeout: timeoutVal,
+          maximumAge: 0
+        });
+    }
+    else {
+      alert("Geolocation не поддерживается данным браузером");
+    };
   }
+  //вместо этого форвард из фрейма, который открыт по https
+  //не прокатило =((((
+  // function secure_coords_listener(event) {
+  //   if (event.origin !== 'https://' + socket.socket.options.host)
+  //     return;
+
+  //   displayPosition(event.data);
+  // }
+
+  // if (window.addEventListener) {
+  //   window.addEventListener("message", secure_coords_listener, false);
+  // }
+  // else {
+  //   window.attachEvent("onmessage", secure_coords_listener);
+  // }
 
 
   // function displayPosition(position) {
