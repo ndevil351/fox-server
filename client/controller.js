@@ -77,6 +77,10 @@ function ChatController($scope) {
       name_id: '',
       player_name: ''
     });
+    
+    name = $scope.name;
+    name_id = '';
+    player_name: '';
 
   };
 
