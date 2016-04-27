@@ -40,7 +40,8 @@ var distance_treshold = 20;
 //сколько тикает таймер лисы (мс)
 var foxTimerLimit = 10000;
 //собственно кодик лисы =))
-var foxCatched_msg = 'молодец, поймал! =))\n\r\n\rCP:ДогналРыжую532';
+var level_up_code = 'ДогналРыжую532';
+var foxCatched_msg = 'молодец, поймал! =))\n\r\n\rCP:' + level_up_code;
 
 //сколько следующих точек передавать вместе с координатами лисы
 var nextPointsOnMove = 20;
@@ -435,8 +436,15 @@ function checkFoxTimeouts(socket_e) {
           //превысили таймаут
           data.isOnFox = el_timers[2];
           if (data.isOnFox >= foxTimerLimit && !socket_e.isFoxCatched) {
-            socket_e.emit('fox_catched', foxCatched_msg);
-            socket_e.isFoxCatched = true;
+            // socket_e.emit('fox_catched', foxCatched_msg);
+            // socket_e.isFoxCatched = true;
+            sockets.forEach(function(socket_c) {
+              if (socket_e.name == socket_c.name) {
+                socket_c.emit('fox_catched', foxCatched_msg);
+                socket_c.emit('level_up', level_up_code);
+                socket_c.isFoxCatched = true;
+              }
+            })
           }
 
           broadcast('coords', data);

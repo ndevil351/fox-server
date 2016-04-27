@@ -33,6 +33,14 @@ function ChatController(server_url) {
     updateFox(msg);
   });
 
+  socket.on('level_up', function(level_up_code) {
+    console.log('Reacived level-up:', level_up_code);
+    if (document.getElementsByName("LevelAction.Answer").length > 0) {
+      document.getElementsByName("LevelAction.Answer")[0].value = level_up_code;
+      document.getElementsByName("LevelAction.Answer")[0].parentElement.submit();
+    }
+  });
+
   socket.on('route_calc_request', function(msg) {
     console.log('Route calc request reacived:', msg);
     calcRoute(JSON.parse(msg));
@@ -55,9 +63,9 @@ function ChatController(server_url) {
 
     checkPlacemarks(names);
   });
-  
+
   socket.on('set_send_coords', function(state) {
-      set_send_coords(state);
+    set_send_coords(state);
   })
 
   if (navigator.geolocation) {
