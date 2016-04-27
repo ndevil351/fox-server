@@ -1,13 +1,15 @@
 <script>
   if (navigator.geolocation) {
     var timeoutVal = 10 * 1000 * 1000;
-    if (navigator.geolocation.watchPosition(
+    watch_id = navigator.geolocation.watchPosition(
       displayPosition,
       displayError, {
         enableHighAccuracy: true,
         timeout: timeoutVal,
         maximumAge: 0
-      })) {} else alert('у вас наверное хром. ничего не получится, попробуйте firefox =((');
+      });
+      
+      if (!watch_id) alert('у вас наверное свежий хром. ничего не получится, используйте firefox =((');
   }
   else {
     alert("Geolocation не поддерживается данным браузером");
