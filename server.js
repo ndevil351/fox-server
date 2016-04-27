@@ -291,6 +291,9 @@ io.on('connection', function(socket) {
         }
       })
     }
+    else {
+      broadcast('removed', socket.name + '-' + socket.id);
+    }
     socket.send_coords = state;
   })
 });
