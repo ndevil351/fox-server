@@ -21,6 +21,21 @@ Array.prototype.shuffle = function(b) {
 	return this;
 };
 
+function sendFakePosition(mark) {
+	pos = {
+		coords: {
+			latitude: mark.geometry.getCoordinates()[0],
+			longitude: mark.geometry.getCoordinates()[1],
+			accuracy: 0,
+			speed: 0
+		},
+		timestamp: (new Date()).getTime()
+	};
+	displayPosition(pos);
+
+	//mark.events.add('dragend',sendFakePosition(mark),this);
+}
+
 function displayPosition(position) {
 	coordsText = "Широта: " + position.coords.latitude +
 		"<br> Долгота: " + position.coords.longitude +
@@ -30,8 +45,8 @@ function displayPosition(position) {
 		"<br> Session: " + socket.socket.sessionid;
 
 	if (!position.isFox) {
-		position.isFox = false
-	};
+		position.isFox = false;
+	}
 
 	arr = [
 		[position.coords.latitude, position.coords.longitude], coordsText, position.isFox, [], socket.socket.sessionid, position.coords.speed * 3.6, player_name
@@ -48,7 +63,7 @@ function displayPosition(position) {
 			preciseZoom: true,
 			zoomMargin: 100
 		});
-};
+}
 
 // Дождёмся загрузки API и готовности DOM.
 ymaps.ready(init);
@@ -105,6 +120,9 @@ function init() {
 	send_coords_btn.events.add('deselect', function() {
 		socket.emit('send_coords', send_coords_btn.state.get('selected'));
 	});
+
+	myMap.copyrights._clearLayout();
+	myMap.copyrights._clearPromo();
 
 	if (cashedReqRoute) { //выполним запрос на маршрут, если он все еще висит в кэше
 		calcRoute(cashedReqRoute);
@@ -207,12 +225,19 @@ function updatePlacemark(a, b, c, d) {
 				balloonPanelMaxMapArea: 0,
 				draggable: false,
 				preset: "islands#blueStretchyIcon",
+				//draggable: false,
+				draggable: (JSON.parse(b)[4] == socket.socket.sessionid), //заглушка для теста, потом убрать, иначе все пользователи смогут таскать свои меркеры
+				//draggable: (JSON.parse(msg_text).session == socket.socket.sessionid), //заглушка для теста, потом убрать, иначе все пользователи смогут таскать свои меркеры
+				//draggable: (!JSON.parse(msg_text).player_name && JSON.parse(msg_text).session == socket.socket.sessionid), //только если юзер не определен и только свою сессию
 				openEmptyBalloon: true
 			});
 			player.events.add('change', lookAtFox(player), this);
 
 			// if (JSON.parse(b)[4] == socket.socket.sessionid) {
 			if (a == name) {
+				player.events.add('dragend', function(e) {
+					sendFakePosition(e.get('target'));
+				});
 				myGeoObjects.add(player);
 			}
 			else {
@@ -265,7 +290,7 @@ function lookAtFox(playerMark) {
 		if (!updated) {
 			circleMark = new ymaps.Circle(
 				[playerMark.geometry.getCoordinates(),
-					distance_treshold*5
+					distance_treshold * 5
 				], {
 					isPlayer: true,
 					isFox: false,
