@@ -163,7 +163,7 @@ function updatePlacemark(a, b, c, d) {
 					else if (img_index <= 0) {
 						img_index = -10 * (img_index % 2);
 					};
-					m.options.set('fillImageHref', 'car/' + img_index + '.png');
+					m.options.set('fillImageHref', 'https://' + socket.socket.options.host + '/car/' + img_index + '.png');
 				};
 				m.events.add('change', lookAtFox(m), this);
 				updated = true;
@@ -186,7 +186,7 @@ function updatePlacemark(a, b, c, d) {
 						else if (img_index <= 0) {
 							img_index = -10 * (img_index % 2);
 						};
-						m.options.set('fillImageHref', 'car/' + img_index + '.png');
+						m.options.set('fillImageHref', 'https://' + socket.socket.options.host + '/car/' + img_index + '.png');
 					};
 					m.events.add('change', lookAtFox(m), this);
 					updated = true;
@@ -286,7 +286,7 @@ function lookAtFox(playerMark) {
 					//
 					//fill: true,
 					//fillMethod: stretch,
-					fillImageHref: 'car/10.png',
+					fillImageHref: 'https://' + socket.socket.options.host + '/car/10.png',
 					fillOpacity: 0.3,
 					strokeColor: "#cc3300", //цвет обводки (рыжий)
 					strokeOpacity: 0.5, // Прозрачность обводки.
