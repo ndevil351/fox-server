@@ -5,6 +5,7 @@
 //
 var http = require('http');
 var path = require('path');
+var fs = require('fs');
 
 var async = require('async');
 var socketio = require('socket.io');
@@ -72,6 +73,16 @@ var refPoints = [
 var routeStart = [
   [60.002438, 30.200919] //спар (начало)
 ];
+
+function initDefaultWayPoints() {
+  if (fs.accessSync(__dirname + '/car/def_wp.json')) {
+    var file = fs.readFileSync(__dirname + '/car/def_wp.json', 'utf8');
+    foxWaypoints = JSON.parse(file);
+    foxWaypoints_next = [].concat(foxWaypoints);
+  }
+}
+
+initDefaultWayPoints();
 
 /* Array.shuffle( deep ) - перемешать элементы массива случайным образом
 deep - необязательный аргумент логического типа, указывающий на то, 
