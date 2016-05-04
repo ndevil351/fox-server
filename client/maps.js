@@ -407,18 +407,20 @@ function checkPlacemarks(placemark_names) {
 			myMap.geoObjects.remove(m);
 		}
 	};
-	for (i = 0; i < myGeoObjects.getLength(); i++) {
-		m = myGeoObjects.get(i);
-		if (m.geometry &&
-			m.geometry.getType() == "Point" &&
-			m.properties.get('isPlayer') &&
-			//			placemark_names.indexOf(m.properties.get('iconContent')) < 0) {
-			!placemark_names.find(function(element, index, array) {
-				return element.name + '-' + element.id == m.properties.get('playerID');
-			})) {
-			myGeoObjects.remove(m);
-		}
-	};
+	if (myGeoObjects) {
+		for (i = 0; i < myGeoObjects.getLength(); i++) {
+			m = myGeoObjects.get(i);
+			if (m.geometry &&
+				m.geometry.getType() == "Point" &&
+				m.properties.get('isPlayer') &&
+				//			placemark_names.indexOf(m.properties.get('iconContent')) < 0) {
+				!placemark_names.find(function(element, index, array) {
+					return element.name + '-' + element.id == m.properties.get('playerID');
+				})) {
+				myGeoObjects.remove(m);
+			}
+		};
+	}
 }
 
 function addFoxRoute() {
