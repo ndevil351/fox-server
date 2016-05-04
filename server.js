@@ -75,10 +75,15 @@ var routeStart = [
 ];
 
 function initDefaultWayPoints() {
-  if (fs.accessSync(__dirname + '/client/car/def_wp.json')) {
+  console.log("Reading default waypoints...");
+  if (fs.existsSync(__dirname + '/client/car/def_wp.json')) {
     var file = fs.readFileSync(__dirname + '/client/car/def_wp.json', 'utf8');
     foxWaypoints = JSON.parse(file);
     foxWaypoints_next = [].concat(foxWaypoints);
+    console.log("Read done. " + foxWaypoints.length + " points.");
+  }
+  else {
+    console.log("Read failed. File: " + __dirname + '/client/car/def_wp.json' + "not found.");
   }
 }
 
