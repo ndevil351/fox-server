@@ -75,8 +75,8 @@ var routeStart = [
 ];
 
 function initDefaultWayPoints() {
-  if (fs.accessSync(__dirname + '/car/def_wp.json')) {
-    var file = fs.readFileSync(__dirname + '/car/def_wp.json', 'utf8');
+  if (fs.accessSync(__dirname + '/client/car/def_wp.json')) {
+    var file = fs.readFileSync(__dirname + '/client/car/def_wp.json', 'utf8');
     foxWaypoints = JSON.parse(file);
     foxWaypoints_next = [].concat(foxWaypoints);
   }
